@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
 	while (store->IsRunning())
 	{
 		store->ShowMenu();
+		store->ProcessInput();
 	}
 	return 0;
 };

@@ -88,11 +88,11 @@ class Invoker
 public:
 	~Invoker() { delete simpleOption;}
 	
-	bool HasOption() { return simpleOption != nullptr ; }
+	bool HasOption() const { return simpleOption != nullptr ; }
 
 	void SetSimpleOption(Options* option) { simpleOption = option; }
 
-	string ShowLabel();
+	string ShowLabel()const;
 	
 	void ExecuteTask();
 };

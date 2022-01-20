@@ -13,13 +13,13 @@ class Menu
 public:
 	Menu();
 	~Menu();
-	void ShowMenu();
-	bool IsRunning();
-
+	void ShowMenu() const;
+	bool IsRunning() const;
+	void ProcessInput();
 	void SetRunning(bool value) { running = value; }
 private:
-	void ProcessInput();
-	int ValidateOption();
+	
+	int ValidateOption() const;
 	void MenuInitialize();
 	bool running;
 	shared_ptr<UserManagement> userManagement;

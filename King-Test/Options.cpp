@@ -73,7 +73,7 @@ void Receiver::ReadAllMessages(shared_ptr<Messenger>& m, shared_ptr<UserManageme
 	m->ShowAllMessages(u);
 }
 
-string Invoker::ShowLabel()
+string Invoker::ShowLabel() const
 {
 	if (simpleOption)
 	{

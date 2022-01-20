@@ -32,7 +32,7 @@ Menu::~Menu()
 }
 
 
-void Menu::ShowMenu()
+void Menu::ShowMenu() const
 {  
     system("cls");
     for (int i = 0; i < menuOptions.size(); ++i)
@@ -44,10 +44,10 @@ void Menu::ShowMenu()
         }
       
     }
-    ProcessInput();
+  
 }
 
-bool Menu::IsRunning()
+bool Menu::IsRunning() const
 {
 	return running;
 }
@@ -68,7 +68,7 @@ void Menu::ProcessInput()
     }
 }
 
-int Menu::ValidateOption()
+int Menu::ValidateOption() const
 {
     int option;
     cout << "\n Your option: ";
