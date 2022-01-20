@@ -56,7 +56,7 @@ void Menu::ProcessInput()
 {
     int option = ValidateOption()-1;
 
-    if (option > menuOptions.size())
+    if (option >= menuOptions.size() || !menuOptions[option]->HasOption())
     {
         cout << "you entered wrong choice" << endl;
         system("pause");

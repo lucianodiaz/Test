@@ -9,7 +9,7 @@ using namespace std;
 
 class Menu
 {
-	const int nOptions = 10;
+	const int nOptions = 4;
 public:
 	Menu();
 	~Menu();
