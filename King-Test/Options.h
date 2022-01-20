@@ -87,6 +87,8 @@ class Invoker
 
 public:
 	~Invoker() { delete simpleOption;}
+	
+	bool HasOption() { return simpleOption != nullptr ; }
 
 	void SetSimpleOption(Options* option) { simpleOption = option; }
 

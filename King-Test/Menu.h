@@ -9,6 +9,7 @@ using namespace std;
 
 class Menu
 {
+	const int nOptions = 10;
 public:
 	Menu();
 	~Menu();
@@ -19,8 +20,8 @@ public:
 private:
 	void ProcessInput();
 	int ValidateOption();
+	void MenuInitialize();
 	bool running;
-	
 	shared_ptr<UserManagement> userManagement;
 	shared_ptr<Messenger> messenger;
 	vector<Invoker*> menuOptions;

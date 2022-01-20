@@ -1,24 +1,27 @@
 #include "Menu.h"
-
+#include <algorithm>
 Menu::Menu()
 {
     running = true;
 
     userManagement = make_shared<UserManagement>();
     messenger = make_shared<Messenger>();
+    MenuInitialize();
+}
 
+void Menu::MenuInitialize()
+{ 
     /*Initialize menu*/
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < nOptions; i++)
     {
         menuOptions.push_back(new Invoker);
     }
 
-    menuOptions[0]->SetSimpleOption(new UserOption(userManagement,"Create User: "));
-    menuOptions[1]->SetSimpleOption(new MessageSendOption(receiver,userManagement,messenger, "Send Message: "));
+    menuOptions[0]->SetSimpleOption(new UserOption(userManagement, "Create User: "));
+    menuOptions[1]->SetSimpleOption(new MessageSendOption(receiver, userManagement, messenger, "Send Message: "));
     menuOptions[2]->SetSimpleOption(new MessageReadOption(receiver, userManagement, messenger, "Receive All messages for user: "));
     menuOptions[3]->SetSimpleOption(new QuitOption(this, "Quit: "));
 }
-
 Menu::~Menu()
 {
     delete receiver;
@@ -34,8 +37,12 @@ void Menu::ShowMenu()
     system("cls");
     for (int i = 0; i < menuOptions.size(); ++i)
     {
-        cout << (i+1)<<".";
-        cout <<menuOptions[i]->ShowLabel() << endl;
+        if (menuOptions[i]->HasOption())
+        {
+            cout << (i + 1) << ".";
+            cout << menuOptions[i]->ShowLabel() << endl;
+        }
+      
     }
     ProcessInput();
 }
@@ -74,3 +81,4 @@ int Menu::ValidateOption()
     system("cls");
     return option;
 }
+
