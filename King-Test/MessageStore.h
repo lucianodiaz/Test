@@ -20,9 +20,8 @@ public:
 
 private:
 	bool ValidateMessage(string from, string to, string msg) const;
-	Message* AddNewMessage(string from, string to, string msg);
-	//execution with pointer finished
-	vector<Message*> messages;
+	unique_ptr<Message> AddNewMessage(string from, string to, string msg);
+	vector<unique_ptr<Message>> messages;
 	
 };
 

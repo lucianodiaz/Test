@@ -143,12 +143,14 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MessageStore.cpp" />
     <ClCompile Include="Messenger.cpp" />
+    <ClCompile Include="Options.cpp" />
     <ClCompile Include="UserManagement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MessageStore.h" />
     <ClInclude Include="Messenger.h" />
+    <ClInclude Include="Options.h" />
     <ClInclude Include="UserManagement.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

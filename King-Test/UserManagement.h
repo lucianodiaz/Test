@@ -14,12 +14,11 @@ public:
 
 	void CreateNewUser();
 
-	
+	bool IsExistingUser(string u)const;
 private:
-//
+
 	void AddNewUser(string u);
-	bool IsExistingUser(string u);
-//
-	//vector<string> users;
+	
+	vector<string> users;
 };
 

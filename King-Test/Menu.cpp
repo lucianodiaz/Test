@@ -2,17 +2,41 @@
 
 Menu::Menu()
 {
+    running = true;
+
+    userManagement = make_shared<UserManagement>();
+    messenger = make_shared<Messenger>();
+
+    /*Initialize menu*/
+    for (int i = 0; i < 4; i++)
+    {
+        menuOptions.push_back(new Invoker);
+    }
+
+    menuOptions[0]->SetSimpleOption(new UserOption(userManagement,"Create User: "));
+    menuOptions[1]->SetSimpleOption(new MessageSendOption(receiver,userManagement,messenger, "Send Message: "));
+    menuOptions[2]->SetSimpleOption(new MessageReadOption(receiver, userManagement, messenger, "Receive All messages for user: "));
+    menuOptions[3]->SetSimpleOption(new QuitOption(this, "Quit: "));
+}
+
+Menu::~Menu()
+{
+    delete receiver;
+    for (auto a : menuOptions)
+    {
+        delete a;
+    }
 }
 
 
 void Menu::ShowMenu()
-{
+{  
     system("cls");
-    cout << "Please select an option: " << endl;
-    cout << "1. Create User: " << endl;
-    cout << "2. Send Message: " << endl;
-    cout << "3. Receive All Messages for User: " << endl;
-    cout << "4. Quit: " << endl;
+    for (int i = 0; i < menuOptions.size(); ++i)
+    {
+        cout << (i+1)<<".";
+        cout <<menuOptions[i]->ShowLabel() << endl;
+    }
     ProcessInput();
 }
 
@@ -23,39 +47,17 @@ bool Menu::IsRunning()
 
 void Menu::ProcessInput()
 {
-    int option = ValidateOption();
+    int option = ValidateOption()-1;
 
-    switch (option)
+    if (option > menuOptions.size())
     {
-    case 1:
-        //call user manager
-        cout << "You choice option: " << option << endl;
-    /*    if (userManagement)
-        {
-            userManagement->CreateNewUser();
-        }*/
-        system("pause");
-        break;
-    case 2:
-        //call message sender
-        cout << "You choice option: " << option << endl;
-        system("pause");
-        break;
-    case 3:
-        //call receiver manager
-        cout << "You choice option: " << option << endl;
-        system("pause");
-        break;
-    case 4:
-        //quit
-        cout << "You choice option: " << option << endl;
-        running = false;
-        getchar();
-        break;
-    default:
         cout << "you entered wrong choice" << endl;
         system("pause");
-        break;
+    }
+    else
+    {
+        menuOptions[option]->ExecuteTask();
+        system("pause");
     }
 }
 

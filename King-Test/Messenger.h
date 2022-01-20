@@ -2,19 +2,23 @@
 #include <string>
 #include <memory>
 #include "MessageStore.h"
-
+#include "UserManagement.h"
 using namespace std;
 class Messenger
 {
 public:
 	Messenger();
 
-	void SendMessage(string from, string to, string msg);
+	void SendMessage(shared_ptr<UserManagement> u);
 
-	void ShowAllMessages(string to);
+	void ShowAllMessages(shared_ptr<UserManagement> u);
 
 private:
-	//execution with pointer finished
-	MessageStore* messageStore;
+	
+	void WriteMessage();
+	bool CheckUser(string &usernameCheck, shared_ptr<UserManagement> u);
+	string from,to,msg;
+
+	unique_ptr<MessageStore> messageStore;
 };
 

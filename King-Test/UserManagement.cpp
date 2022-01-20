@@ -14,7 +14,7 @@ void UserManagement::CreateNewUser()
     cout << endl;
    if (IsExistingUser(user))
     {
-        cout << "ERROR: User already exists!" << endl;
+        cout << "ERROR: User already exists! or It's in blank." << endl;
     }
     else
     {
@@ -24,12 +24,15 @@ void UserManagement::CreateNewUser()
 
 void UserManagement::AddNewUser(string u)
 {
-   // users.push_back(u);
-    cout << "User: " << u << "added!" << endl;
-    system("pause");
+    users.push_back(u);
+    cout << "User: " << u << " added!" << endl;
 }
 
-bool UserManagement::IsExistingUser(string u)
+bool UserManagement::IsExistingUser(string u) const
 {
-    return true;//(find(users.begin(), users.end(), u) != users.end());
+    if (u.empty())
+    {
+        return false;
+    }
+    return (find(users.begin(), users.end(), u) != users.end());
 }

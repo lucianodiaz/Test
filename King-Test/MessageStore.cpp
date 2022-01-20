@@ -2,6 +2,7 @@
 
 MessageStore::MessageStore()
 {
+	messages.reserve(10);
 }
 
 void MessageStore::SetNewMessage(string from, string to, string msg)
@@ -28,6 +29,7 @@ void MessageStore::GetAllMessages(string to)
 		for (unsigned int i = 0; i < messages.size(); ++i)
 		{
 			auto& m = messages[i];
+			
 			if (m->to == to)
 			{
 				cout << "Message " << ++num << endl;
@@ -55,7 +57,7 @@ bool MessageStore::ValidateMessage(string from, string to, string msg) const
 	return valid;
 }
 
-Message* MessageStore::AddNewMessage(string from, string to, string msg)
+unique_ptr<Message> MessageStore::AddNewMessage(string from, string to, string msg)
 {
 	unique_ptr<Message> msgTemp = make_unique<Message>();
 
@@ -63,5 +65,5 @@ Message* MessageStore::AddNewMessage(string from, string to, string msg)
 	msgTemp->to = to;
 	msgTemp->msg = msg;
 
-	return msgTemp.get();
+	return msgTemp;
 }
