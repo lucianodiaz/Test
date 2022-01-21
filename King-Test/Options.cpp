@@ -33,7 +33,6 @@ MessageSendOption::MessageSendOption(Receiver* r,shared_ptr<UserManagement>& u, 
 
 void MessageSendOption::Execute() 
 {
-	cout << "Message Send Option" << endl;
 	receiver->WriteAnMessage(messenger, userM);
 }
 
@@ -47,20 +46,19 @@ MessageReadOption::MessageReadOption(Receiver* r, shared_ptr<UserManagement>& u,
 
 void MessageReadOption::Execute() 
 {
-	cout << "Message Read Option" << endl;
 	receiver->ReadAllMessages(messenger,userM);
 }
 
 QuitOption::QuitOption(Menu* m, string l)
 {
 	label = l;
-	menu = m;
+	menu.reset(m);
 }
 
 void QuitOption::Execute() 
 {
 	cout << "Quit Aplication" << endl;
-	menu->SetRunning(false);
+	menu->StopRunning();
 }
 
 void Receiver::WriteAnMessage(shared_ptr<Messenger>& m, shared_ptr<UserManagement>& u)
@@ -79,9 +77,10 @@ string Invoker::ShowLabel() const
 	{
 		return simpleOption->GetLabel();
 	}
+	return "";
 }
 
-void Invoker::ExecuteTask()
+void Invoker::ExecuteTask() const
 {
 	if (simpleOption)
 	{

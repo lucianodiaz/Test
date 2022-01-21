@@ -5,7 +5,7 @@ MessageStore::MessageStore()
 	messages.reserve(10);
 }
 
-void MessageStore::SetNewMessage(string from, string to, string msg)
+void MessageStore::SendNewMessage(string from, string to, string msg)
 {
 	if (ValidateMessage(from, to, msg))
 	{
@@ -49,12 +49,8 @@ void MessageStore::GetAllMessages(string to)
 
 bool MessageStore::ValidateMessage(string from, string to, string msg) const
 {
-	bool valid = true;
-	if (from.empty() || to.empty() || msg.empty())
-	{
-		valid = false;
-	}
-	return valid;
+	const bool isValid = !from.empty() && !to.empty() && !msg.empty();
+	return isValid;
 }
 
 unique_ptr<Message> MessageStore::AddNewMessage(string from, string to, string msg)

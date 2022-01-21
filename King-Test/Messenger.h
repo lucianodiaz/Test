@@ -1,9 +1,12 @@
 #pragma once
-#include <string>
+
 #include <memory>
+#include <string>
 #include "MessageStore.h"
 #include "UserManagement.h"
+
 using namespace std;
+
 class Messenger
 {
 public:
@@ -15,9 +18,9 @@ public:
 
 private:
 	
-	void WriteMessage();
-	bool CheckUser(string &usernameCheck, shared_ptr<UserManagement> u);
-	string from,to,msg;
+	bool CheckUser(string& usernameCheck, shared_ptr<UserManagement> u) const;
+
+	void WriteMessage(string& m);
 
 	unique_ptr<MessageStore> messageStore;
 };
